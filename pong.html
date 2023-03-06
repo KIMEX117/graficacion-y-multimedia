@@ -1,0 +1,70 @@
+<!--  
+        "PONG GAME"
+    
+    Hecho por:
+    - Enrique León Geraldo IDS 8 T.M.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P5.js Pong</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+    <script>
+        //PLAYER 1
+        const p1 = {
+            x: 25,
+            y: 20,
+            w: 25,
+            h: 120,
+            step: 2,
+            move: function() {
+                if(this.y + this.h >= height)
+                this.step = -2;
+                else if(this.y <= 0)
+                this.step = 2;
+                this.y = this.y + this.step;
+            }
+        }
+        //PLAYER 2
+        const p2 = {
+            x: 0,
+            y: 500,
+            w: 25,
+            h: 120,
+            step: 2,
+            move: function() {
+                if(this.y + this.h >= height)
+                this.step = -2;
+                else if(this.y <= 0)
+                this.step = 2;
+                this.y = this.y + this.step;
+            }
+        }
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            p2.x = windowWidth-100;
+            //createCanvas(800, 800);
+        }
+
+        function draw() {
+            background("#1f1e1e");
+            fill("white");
+            rect(p1.x, p1.y, p1.w, p1.h);
+            p1.move();
+            rect(p2.x, p2.y, p2.w, p2.h);
+            p2.move();
+        }
+    </script>
+</body>
+</html>
