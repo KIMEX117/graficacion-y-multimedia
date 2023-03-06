@@ -1,0 +1,113 @@
+<!--  
+        "FICHAS MULAS DOMINÓ"
+    
+    Hecho por:
+    - Enrique León Geraldo IDS 8 T.M.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P5.js Fichas Mulas</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(600, 200);
+        }
+
+        function draw() {
+            background("#212a37");
+            for (let i = 0; i < 7; i++) {
+                drawFicha(50 + 70 * i, 40, i);
+            }
+        }
+
+        function drawFicha(x, y, number) {
+            let width = 60;
+            let height = 120;
+
+            //DIBUJAR LA FICHA
+            fill("#ebdfcf");
+            rect(x, y, width, height, 5);
+            line(x + 5, y + width, x + (width - 5), y + width);
+
+            //DIBUJAR CÍRCULOS
+            switch (number) {
+                case 0:
+                    break;
+                case 1:
+                    fill(0);
+                    circle(x + width / 2, y + height / 4, 12);
+                    circle(x + width / 2, y + (height / 4) * 3, 12);
+                    break;
+                case 2:
+                    fill(0);
+                    circle(x + width / 4, y + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 3, y + (height / 2 / 4) * 3, 12);
+
+                    circle(x + width / 4, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    break;
+                case 3:
+                    fill(0);
+                    circle(x + width / 4, y + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 2, y + (height / 2 / 4) * 2, 12);
+                    circle(x + (width / 4) * 3, y + (height / 2 / 4) * 3, 12);
+
+                    circle(x + width / 4, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 2, y + height / 2 + (height / 2 / 4) * 2, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    break;
+                case 4:
+                    fill(0);
+                    circle(x + width / 4, y + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 / 4, 12);
+                    circle(x + width / 4, y + (height / 2 / 4) * 3, 12);
+                    circle(x + (width / 4) * 3, y + (height / 2 / 4) * 3, 12);
+
+                    circle(x + width / 4, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + width / 4, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    break;
+                case 5:
+                    fill(0);
+                    circle(x + width / 4, y + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 2, y + (height / 2 / 4) * 2, 12);
+                    circle(x + width / 4, y + (height / 2 / 4) * 3, 12);
+                    circle(x + (width / 4) * 3, y + (height / 2 / 4) * 3, 12);
+
+                    circle(x + width / 4, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + (width / 4) * 2, y + height / 2 + (height / 2 / 4) * 2, 12);
+                    circle(x + width / 4, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    break;
+                case 6:
+                    fill(0);
+                    circle(x + width / 4, y + height / 2 / 4, 12);
+                    circle(x + width / 4, y + (height / 2 / 4) * 2, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 / 4, 12);
+                    circle(x + width / 4, y + (height / 2 / 4) * 3, 12);
+                    circle(x + (width / 4) * 3, y + (height / 2 / 4) * 2, 12);
+                    circle(x + (width / 4) * 3, y + (height / 2 / 4) * 3, 12);
+
+                    circle(x + width / 4, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + width / 4, y + height / 2 + (height / 2 / 4) * 2, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + height / 2 / 4, 12);
+                    circle(x + width / 4, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + (height / 2 / 4) * 2, 12);
+                    circle(x + (width / 4) * 3, y + height / 2 + (height / 2 / 4) * 3, 12);
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
