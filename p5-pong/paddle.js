@@ -3,6 +3,7 @@ class Paddle {
         this.w = 20;
         this.h = 120;
         this.y = int(height / 2);
+        this.step = 0;
         if(isLeft) {
             this.x = 0
         } else {
@@ -26,6 +27,14 @@ class Paddle {
     }
 
     draw() {
-        
+        rect(this.x, this.y, this.w, this.h);
+    }
+
+    move(dir) {
+        this.step = dir;
+    }
+
+    update() {
+        this.y += this.step;
     }
 }

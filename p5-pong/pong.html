@@ -20,40 +20,54 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
     <script src="ball.js"></script>
+    <script src="paddle.js"></script>
     <script>
-        //PLAYER 1
-        
-
+        //PLAYERS (PADDLES)
+        let p1;
+        let p2;
         //PELOTA
         let ball;
+        //CONSTANTE
+        const SPEED_PADDLE = 1;
 
         function setup() {
-            createCanvas(windowWidth, windowHeight);
+            createCanvas(windowWidth, windowHeight-100);
             ball = new Ball();
+            p1 = new Paddle(true);
+            p2 = new Paddle(false);
         }
 
         function draw() {
             background("#1f1e1e");
             fill("white");
-            rect(p1.x, p1.y, p1.w, p1.h);
+            p1.draw();
+            p2.draw();
             ball.draw();
 
             ball.move();
-            p1.move();
+            p1.update();
+            p2.update();
 
             ball.edge();
+        }
+
+        function keyReleased() {
+            p1.move(0);
+            p2.move(0);
         }
 
         function keyPressed() {
             //console.log(key, keyCode);
 
+            //PLAYER #1
             //TECLA 'w'
             if(keyCode === 87)
-                console.log('p1 up');
+                p1.move(-SPEED_PADDLE);
             //TECLA 's'
             if(keyCode === 83)
-                console.log('p1 down');
+                p1.move(SPEED_PADDLE);
 
+            //PLAYER #2
             //TECLA 'Arrow Up'
             if(keyCode === UP_ARROW)
                 console.log('p2 up');
