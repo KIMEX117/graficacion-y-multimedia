@@ -1,0 +1,66 @@
+<!--  
+        "PONG GAME"
+    
+    Hecho por:
+    - Enrique León Geraldo IDS 8 T.M.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P5.js Pong</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+    <script src="ball.js"></script>
+    <script>
+        //PLAYER 1
+        
+
+        //PELOTA
+        let ball;
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            ball = new Ball();
+        }
+
+        function draw() {
+            background("#1f1e1e");
+            fill("white");
+            rect(p1.x, p1.y, p1.w, p1.h);
+            ball.draw();
+
+            ball.move();
+            p1.move();
+
+            ball.edge();
+        }
+
+        function keyPressed() {
+            //console.log(key, keyCode);
+
+            //TECLA 'w'
+            if(keyCode === 87)
+                console.log('p1 up');
+            //TECLA 's'
+            if(keyCode === 83)
+                console.log('p1 down');
+
+            //TECLA 'Arrow Up'
+            if(keyCode === UP_ARROW)
+                console.log('p2 up');
+            //TECLA 'Arrow Down'
+            if(keyCode === DOWN_ARROW)
+                console.log('p2 down');
+        }
+    </script>
+</body>
+</html>
