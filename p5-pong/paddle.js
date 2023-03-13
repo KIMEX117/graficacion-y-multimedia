@@ -5,25 +5,10 @@ class Paddle {
         this.y = int(height / 2);
         this.step = 0;
         if(isLeft) {
-            this.x = 0
+            this.x = 100
         } else {
-            this.x = width - this.w;
+            this.x = width - this.w - 100;
         }
-
-        /* const p1 = {
-            x: 25,
-            y: 20,
-            w: 25,
-            h: 120,
-            step: 2,
-            move: function() {
-                if(this.y + this.h >= height)
-                this.step = -2;
-                else if(this.y <= 0)
-                this.step = 2;
-                this.y = this.y + this.step;
-            }
-        } */
     }
 
     draw() {
@@ -36,5 +21,12 @@ class Paddle {
 
     update() {
         this.y += this.step;
+    }
+
+    getX() {
+        return this.x;
+    }
+    getY() {
+        return this.y;
     }
 }

@@ -28,7 +28,9 @@
         //PELOTA
         let ball;
         //CONSTANTE
-        const SPEED_PADDLE = 1;
+        const SPEED_PADDLE = 10;
+        //PUNTAJE   P1  P2
+        let score = [0, 0];
 
         function setup() {
             createCanvas(windowWidth, windowHeight-100);
@@ -39,16 +41,35 @@
 
         function draw() {
             background("#1f1e1e");
+            noStroke();
             fill("white");
+            for (let i = 0; i <= height; i+=50) {
+                rect((width-10)/2, i, 10, 20);
+            }
+
             p1.draw();
             p2.draw();
             ball.draw();
 
             ball.move();
+
             p1.update();
             p2.update();
 
             ball.edge();
+            ball.collideWithPlayer(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+
+            recordScore();
+            textSize(32);
+            text('Player 1', 10, 30);
+            text('Player 2', width-130, 30);
+            textSize(48);
+            if(score[0]<10){
+                text(score[0], width/2-80, 40);
+            } else {
+                text(score[0], width/2-100, 40);
+            }
+            text(score[1], width/2+60, 40);
         }
 
         function keyReleased() {
@@ -57,8 +78,6 @@
         }
 
         function keyPressed() {
-            //console.log(key, keyCode);
-
             //PLAYER #1
             //TECLA 'w'
             if(keyCode === 87)
@@ -70,10 +89,18 @@
             //PLAYER #2
             //TECLA 'Arrow Up'
             if(keyCode === UP_ARROW)
-                console.log('p2 up');
+                p2.move(-SPEED_PADDLE);
             //TECLA 'Arrow Down'
             if(keyCode === DOWN_ARROW)
-                console.log('p2 down');
+                p2.move(SPEED_PADDLE);
+        }
+
+        function recordScore() {
+            if(ball.getX()<ball.r+5){
+                score[1]++;
+            } else if(ball.getX()>width-ball.r-5) {
+                score[0]++;
+            }
         }
     </script>
 </body>
