@@ -4,9 +4,21 @@ class Rapidash {
 		this.x = 0;
         this.side = 100;
 		this.y = height - this.side;
+        this.vy = 0;
+        this.gravity = 2;
     }
 
     draw() {
         image(this.img, this.x, this.y, this.side, this.side);
+    }
+
+    jump() {
+        this.vy = -30;
+    }
+
+    update() {
+        this.y += this.vy;
+        this.vy += this.gravity; 
+        this.y = constrain(this.y, height/2-this.side, height-this.side);
     }
 }

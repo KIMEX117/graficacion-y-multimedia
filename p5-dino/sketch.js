@@ -1,3 +1,4 @@
+const SPACE_BLANK = " ";
 let bgImg;
 let bg1;
 let bg2;
@@ -23,4 +24,13 @@ function draw() {
 
     bg1.scroll();
     bg2.scroll();
+
+    rapidash.update();
+}
+
+function keyPressed() {
+    if(key === SPACE_BLANK) {
+        console.log('Jump');
+        rapidash.jump();
+    }
 }
