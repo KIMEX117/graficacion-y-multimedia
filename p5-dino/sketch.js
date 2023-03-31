@@ -6,6 +6,8 @@ let rapidashImg;
 let rapidash;
 let exeggutorImg;
 const exeggutors = [];
+let score = 0;
+let timer = 1;
 
 function preload() {
     bgImg = loadImage('assets/bg.png');
@@ -22,9 +24,20 @@ function setup() {
 
 function draw() {
     //&& (exeggutors[exeggutors.length-1].x < width - exeggutors[exeggutors.length-1].s)
-    if(random(1) < 0.005) {
+    //Método anterior
+    /* if(random(1) < 0.005) {
         exeggutors.push(new Exeggutor(exeggutorImg));
+    } */
+    if (frameCount % 60 == 0 && timer > 0) {
+        timer--;
+        if(random(1) < 0.45 && timer == 0) {
+            exeggutors.push(new Exeggutor(exeggutorImg));
+        }
+        if(timer==0) {
+            timer = 1;
+        }
     }
+    
     bg1.draw();
     bg2.draw();
     rapidash.draw();
@@ -34,17 +47,29 @@ function draw() {
             noLoop();
         }
         exeggutor.move();
+        recordScore(exeggutor);
     }
 
     bg1.scroll();
     bg2.scroll();
 
     rapidash.update();
+
+    textSize(32);
+    fill(0, 0, 0);
+    text('Puntaje: '+score, 40, 40);
 }
 
 function keyPressed() {
     if(key === SPACE_BLANK) {
         console.log('Jump');
         rapidash.jump();
+    }
+}
+
+function recordScore(exeggutor) {
+    if(exeggutor.x - -exeggutor.s <= 0 +-exeggutor.s) {
+        score += 10;
+        exeggutors.shift();
     }
 }

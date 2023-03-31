@@ -4,7 +4,8 @@ class Exeggutor {
         this.x = width;
         this.s = 70;
         this.y = height - this.s;
-        this.SPEED = -6;
+        //this.SPEED = -6;
+        this.SPEED = 6;
     }
 
     draw() {
@@ -16,6 +17,7 @@ class Exeggutor {
     }
 
     move() {
-        this.x += this.SPEED;
+        //this.x += this.SPEED;
+        this.x -= this.SPEED;
     }
 }

@@ -18,7 +18,7 @@ class Rapidash {
 
     jump() {
         if(this.y === height - this.side) {
-            this.vy = -30;
+            this.vy = -35;
         } 
     }
 
@@ -49,11 +49,11 @@ class Rapidash {
     }
 
     circleCollision(exeggutor) {
-        const x1 = this.x + this.side + 0.5;
-        const y1 = this.y + this.side + 0.5;
+        const x1 = this.x + this.side * 0.5;
+        const y1 = this.y + this.side * 0.5;
 
-        const x2 = exeggutor.x + exeggutor.s + 0.5;
-        const y2 = exeggutor.y + exeggutor.s + 0.5;
+        const x2 = exeggutor.x + exeggutor.s * 0.5;
+        const y2 = exeggutor.y + exeggutor.s * 0.5;
 
         return this.side * 0.5 + exeggutor.s * 0.5 >= this.distance(x1, y1, x2, y2);
     }
