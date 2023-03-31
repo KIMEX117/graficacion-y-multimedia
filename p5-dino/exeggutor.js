@@ -9,7 +9,9 @@ class Exeggutor {
 
     draw() {
         noFill();
-        rect(this.x, this.y, this.s, this.s);
+        //rect(this.x, this.y, this.s, this.s);
+        ellipseMode(CORNER);
+        ellipse(this.x, this.y, this.s, this.s);
         image(this.img, this.x, this.y, this.s, this.s);
     }
 

@@ -30,6 +30,9 @@ function draw() {
     rapidash.draw();
     for(let exeggutor of exeggutors) {
         exeggutor.draw();
+        if(rapidash.collision(exeggutor)) {
+            noLoop();
+        }
         exeggutor.move();
     }
 
