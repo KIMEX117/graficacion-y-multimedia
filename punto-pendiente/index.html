@@ -1,0 +1,118 @@
+<!--  
+
+    "Ecuación Punto-Pendiente"
+
+    Descripción:
+    ~ Función para graficar una recta empleando la ecuación punto-pendiente.
+    ~ Utilizando la función creada, dibujar una figura en forma de estrella o asterisco.
+    
+    Hecho por:
+    - Enrique León Geraldo IDS 8 T.M.
+
+    Repositorio de GitHub:
+    https://github.com/KIMEX117/graficacion-y-multimedia
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto-Pendiente</title>
+    <style>
+        body {margin: 0;}
+        canvas {display: block;}
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+    <script>
+        function setup() {
+            createCanvas(600, 600);
+        }
+
+        function draw() {
+            //FONDO DE LIENZO - Color: Negro
+            background(0, 0, 0);
+
+            //FIGURA CON FUNCIÓN LINE - Color: Blanco
+            stroke(255);
+            line(0, 0, width, width);
+            line(width, 0, 0, width);
+            line(width/2, 0, width/2, width);
+            line(0, width/2, width, width/2);
+           
+            //FIGURA CON FUNCIÓN PROPIA - Color: Rosa/magenta brillante
+            stroke(255,34,255);
+            recta(0, 0, width, height);
+            recta(0, height, width, 0);
+            recta(width/2, 0, width/2, height);
+            recta(0, height/2, width, height/2);
+        }
+
+        function recta(x1, y1, x2, y2) {
+            let m = (y2 - y1) / (x2 - x1);
+            let b = y1 - (m*x1);
+            let y = 0;
+            let y_desp = 0;
+
+            if(x1 < x2) {
+                for (let x = x1; x <= x2; x++) {
+                    y = m*x + b;
+                    if(y1==y2) {
+                        point(x, y);
+                    } else {
+                        if(y_desp!=y) {
+                            if(y1<y2) {
+                                for (let i = y_desp; i < y; i++) {
+                                    point(x, i);
+                                }
+                            } else if(y1>y2) {
+                                for (let i = y_desp; i > y; i--) {
+                                    point(x, i);
+                                }
+                            }
+                            y_desp = y;
+                        }
+                    }
+                }
+            } else if(x1 > x2) {
+                for (let x = x1; x >= x2; x--) {
+                    y = m*x + b;
+                    if(y1==y2) {
+                        point(x, y);
+                    } else {
+                        if(y_desp!=y) {
+                            if(y1<y2) {
+                                for (let i = y_desp; i < y; i++) {
+                                    point(x, i);
+                                } 
+                            } else if(y1>y2) {
+                                for (let i = y_desp; i > y; i--) {
+                                    point(x, i);
+                                }
+                            }
+                            y_desp = y;
+                        }
+                    }
+                }
+            } else if(x1 == x2) {
+                let x = x1;
+                if(y1 < y2) {
+                    for (let y = y1; y < y2; y++) {
+                        point(x, y);
+                    }
+                }else if(y1 > y2) {
+                    for (let y = y1; y > y2; y--) {
+                        point(x, y);
+                    }
+                } else {
+                    let y = y1;
+                    point(x, y);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
