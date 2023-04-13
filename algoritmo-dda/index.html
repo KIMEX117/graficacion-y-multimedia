@@ -1,0 +1,144 @@
+<!--  
+
+    "Algoritmo DDA"
+
+    DESCRIPCIÓN:
+    1. Programar el algoritmo DDA.
+    2. Crear la función rectángulo, la cual recibe 4 parámetros:
+        · X Entero: Coordenada x esquina superior izquierda.
+        · Y Entero: Coordenada y esquina superior izquierda.
+        · Ancho Entero: Ancho del rectángulo.
+        · Alto Entero: Alto del rectángulo.
+    3. Crear dos rectángulos utilizando la función rectángulo (programada en el punto 2) y detectar cuando colisionan.
+        ~ El primer rectángulo deberá aparecer en el centro de la pantalla.
+        ~ El segundo rectángulo deberá tener siempre las coordenadas (x, y) del mouse(consultar referencia p5 para las variables mouseX y mouseY).
+    
+    HECHO POR:
+    - Enrique León Geraldo IDS 8 T.M.
+
+    REPOSITORIO DE GITHUB:
+    https://github.com/KIMEX117/graficacion-y-multimedia
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmo DDA</title>
+    <style>
+        body {margin: 0;}
+        canvas {display: block;}
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+    <script>
+        //MEDIDAS DE FIGURAS
+        const figura_mouse = { x: 0, y: 0, w: 100, h: 50 }
+        const figura_centro = { x: 0, y: 0, w: 200, h: 100 }
+        
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            figura_centro.x = (width-figura_centro.w)/2;
+            figura_centro.y = (height-figura_centro.h)/2;
+        }
+
+        function draw() {
+            background(0, 0, 0);
+            figura_mouse.x = mouseX;
+            figura_mouse.y = mouseY;
+
+            //CAMBIAR DE COLOR SI COLISIONAN 
+            if(colision(figura_mouse, figura_centro)) {
+                stroke(255,0,255); //MAGENTA
+            } else {
+                stroke(255); //BLANCO
+            }
+            strokeWeight(1);
+
+            //RECTÁNGULO FIJO EN EL CENTRO
+            dibujarRect(figura_centro.x, figura_centro.y, figura_centro.w, figura_centro.h);
+            //RECTÁNGULO QUE SE MUEVE CON EL MOUSE
+            dibujarRect(figura_mouse.x, figura_mouse.y, figura_mouse.w, figura_mouse.h);
+        }
+
+        function rectaDDA(x1, y1, x2, y2) {
+            let m = abs((y2-y1) / (x2-x1));
+            let dx = abs(x2 - x1);
+            let dy = abs(y2 - y1);
+            let x = x1;
+            let y = y1;
+            let k = max(dx, dy);
+
+            if(m < 1) {
+                for (let i = 0; i < k + 1; i++) {
+                    point(round(x), y);
+                    if(x1<=x2) {
+                        if(y1<=y2){
+                            x++;
+                            y = y + m;
+                        } else if(y1>y2) {
+                            x++;
+                            y = y - m;
+                        }
+                    } else if(x1>x2) {
+                        if(y1<=y2){
+                            x--;
+                            y = y + m;
+                        } else if(y1>y2) {
+                            x++;
+                            y = y - m;
+                        }
+                    }
+                }
+            }
+            else {
+                for (let i = 0; i < k + 1; i++) {
+                    point(round(x), y);
+                    if(x1<=x2) {
+                        if(y1<=y2){
+                            y++;
+                            x = x + 1 / m;
+                        } else if(y1>y2) {
+                            y--;
+                            x = x + 1 / m;
+                        }
+                    } else if(x1>x2) {
+                        if(y1<=y2){
+                            y++;
+                            x = x - 1 / m;
+                        } else if(y1>y2) {
+                            y--;
+                            x = x + 1 / m;
+                        }
+                    }
+                }
+            }
+        }
+
+        function dibujarRect(x, y, w, h) {
+            rectaDDA(x, y, x+w, y); //Arriba
+            rectaDDA(x, y, x, y+h); //Izquierda
+            rectaDDA(x+w, y, x+w, y+h); //Derecha
+            rectaDDA(x, y+h, x+w, y+h); //Abajo
+        }
+
+        function colision(figura1, figura2) {
+            let figura1_top = figura1.y; 
+            let figura1_left = figura1.x; 
+            let figura1_right = figura1.x + figura1.w; 
+            let figura1_bottom = figura1.y + figura1.h; 
+
+            let figura2_top = figura2.y; 
+            let figura2_left = figura2.x; 
+            let figura2_right = figura2.x + figura2.w; 
+            let figura2_bottom = figura2.y + figura2.h; 
+
+            return figura1_right >= figura2_left && figura1_left <= figura2_right && figura1_top <= figura2_bottom && figura1_bottom >= figura2_top;
+        }
+
+    </script>
+</body>
+</html>
