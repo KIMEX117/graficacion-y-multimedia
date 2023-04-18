@@ -1,0 +1,79 @@
+<!--  
+
+    "Algoritmo Punto Medio Círculos"
+
+    DESCRIPCIÓN:
+    Crear una función círculo utilizando el algoritmo punto medio, la cual recibe como parámetros los siguientes valores:
+    · xc: La posición central de x.
+    · yc: La posición central de y.
+    · r: Radio del círculo.
+    
+    HECHO POR:
+    - Enrique León Geraldo IDS 8 T.M.
+
+    REPOSITORIO DE GITHUB:
+    https://github.com/KIMEX117/graficacion-y-multimedia
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto Medio Círculos</title>
+    <style>
+        body {margin: 0;}
+        canvas {display: block;}
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background(0, 0, 0);
+
+            strokeWeight(1);
+            stroke(255); //BLANCO
+            puntoMedioCirculo(100, 100, 50);
+
+            strokeWeight(2);
+            stroke(54, 144, 255); //AZUL CLARO
+            puntoMedioCirculo(200, 200, 80);
+        }
+
+        function puntoMedioCirculo(xc, yc, r) {
+            let x = 0;
+            let y = r;
+            let p = abs(5 / 4 - r);
+
+            while(x <= y) {
+                //OCTANTES
+                point(xc+x, yc+y); //(x,-y)
+                point(xc+y, yc+x); //(y,-x)
+                point(xc+y, yc-x); //(y,x)
+                point(xc+x, yc-y); //(x,y)
+                point(xc-x, yc-y); //(-x,y)
+                point(xc-y, yc-x); //(-y,x)
+                point(xc-y, yc+x); //(-y,-x)
+                point(xc-x, yc+y); //(-x,-y)
+
+                //PARÁMETRO DE DECISIÓN
+                if(p < 0) {
+                    x++;
+                    p = p + (2 * x) + 1;
+                } else if(p >= 0) {
+                    x++;
+                    y--;
+                    p = p + (2 * x) + 1 - (2 * y);
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
